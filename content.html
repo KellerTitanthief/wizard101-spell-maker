@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Wizard101 Spell Maker</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <p></p>
+    <div class="introduction">
+        <h1>Wizard101 Spell Maker</h1>
+        <p>Wizard101 spell maker using raw art instead of images of other cards</p>
+        <p>Spellement paths are not yet included</p>
+    </div>
+    <p></p>
+    <div class="workspace">
+        <input type="file" accept="image/*" id="art-input">
+        <select id="weaving-select">
+            <option value="no-weaving">Weaving</option>
+            <option value="fire-weaving">Fire</option>
+            <option value="storm-weaving">Storm</option>
+            <option value="ice-weaving">Ice</option>
+            <option value="balance-weaving">Balance</option>
+            <option value="death-weaving">Death</option>
+            <option value="myth-weaving">Myth</option>
+            <option value="life-weaving">Life</option>
+            <option value="star-weaving">Star</option>
+            <option value="sun-weaving">Sun</option>
+            <option value="moon-weaving">Moon</option>
+            <option value="shadow-weaving">Shadow</option>
+        </select>
+        <div class="card-frame" id="card-frame">
+            <div id="card-spiral" class="card-spiral"></div>
+            <div class="user-image-wrapper" id="user-image-wrapper">
+                <div id="user-image"></div>
+            </div>
+
+            <img id="display-card" src="SpellBack/balance.png" alt="Death Card" class="card">
+            <div class="weaving-display" id="weaving-display"></div>
+            <div class="nameplate" id="nameplate">Spell</div>
+            <div class="accuracy" id="accuracy"></div>
+            <div class="rank" id="rank"></div>
+            <div class="school" id="school"></div>
+            <div class="type" id="type"></div>
+            <div class="pip1" id="pip1"></div>
+            <div class="pip2" id="pip2"></div>
+            <div class="pip3" id="pip3"></div>
+            <div class="description" id="description">Description text here.</div>
+        </div>
+
+        <div class="icon-bank" id="icon-bank"></div>
+        <select id="target-select">
+            <option value="school">School</option>
+            <option value="type">Type</option>
+            <option value="pip">Pip</option>
+            <option value="image">Image</option>
+            <option value="description">Description</option>
+        </select>
+    </div>
+    
+
+    <p></p>
+    <input type="text" id="name-input" placeholder="Spell name">
+    <input type="text" id="accuracy-input" placeholder="Spell accuracy">
+    <input type="text" id="rank-input" placeholder="Spell rank">
+    <div class="description-workspace" id="description-workspace">
+        <div id="description-input" contenteditable="true" class="rich-input"></div>
+        <div class="color-swatches">
+            <div class="swatch" id="swatch-black" style="background-color: black;"></div>
+            <div class="swatch" id="swatch-purple" style="background-color: rgb(105, 24, 64);"></div>
+            <div class="swatch" id="swatch-white" style="background-color: white;"></div>
+            <input type="color" id="custom-color-picker" style="display: none;">
+        </div>
+    </div>
+
+    <label>Move X <input type="range" id="art-x" min="-100" max="200" value="50"></label>
+    <label>Move Y <input type="range" id="art-y" min="-100" max="200" value="50"></label>
+    <label>Move Z <input type="range" id="art-scale" min="10" max="500" value="100"></label>
+    <label>Rotate <input type="range" id="art-rotate" min="-180" max="180" value="0"></label>
+    <button id="mirror" class="mirror">Mirror</button>
+
+    <div id="preset-image-bank"></div>
+    
+    <p></p>
+    <div id="circle-container"></div>
+    <div id="circle-container2"></div>
+    <div id="circle-container3"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

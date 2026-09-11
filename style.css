@@ -1,0 +1,326 @@
+@font-face {
+    font-family: "Shermlock";
+    src: url("shermlock/Shermlock.woff2") format("woff2");
+}
+
+h1, p {
+    color: rgb(238, 231, 130);
+}
+
+.introduction {
+    background-color: rgb(145, 98, 45);
+    border-radius: 15px;
+}
+
+body, html {
+    width: 100%;
+    min-height: 100vh;
+    background-attachment: fixed;
+    margin: 0;
+    background-color: rgb(0, 27, 117);
+    background-image: url("OtherImages/Backdrop.jpg");
+    background-size: 100% 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    font-family: 'Comic Sans MS', 'Comic Sans', cursive;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.workspace {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    align-items: flex-start;
+}
+
+.description-workspace {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    align-items: flex-start;
+}
+
+.icon-bank {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    background-color: rgb(145, 98, 45);
+    border-radius: 5%;
+    gap: 8px;
+    width: 700px;
+}
+
+.card {
+    position: relative;
+    z-index: 3;
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.circle {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    display: inline-block;
+    cursor: pointer;
+    transition: transform 0.15s ease;
+}
+
+.circle:hover {
+    transform: scale(1.15);
+}
+
+#circle-container, #circle-container2, #circle-container3 {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+
+.card-frame {
+    position: relative;
+    display: inline-block;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.nameplate, .description, .accuracy, .rank, .type, .school, .pip1, .pip2, .pip3, .diagonal {
+    position: absolute;
+    text-align: center;
+    z-index: 4;
+    outline: 1px solid rgb(255, 0, 0, 0.3);
+}
+
+.nameplate {
+    top: 2.5%;
+    left: 3.5%;
+    width: 93%;
+    font-family: 'Shermlock', 'Comic Sans MS', 'Comic Sans', cursive;
+    text-transform: uppercase;
+    color: white;
+    font-size: 16px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-shadow: 2px 2px black;
+}
+
+.description {
+    top: 66%;
+    left: 5.5%;
+    width: 90%;
+    height: 30%;
+    font-family: 'Comic Sans MS', 'Comic Sans', cursive;
+    color: black;
+    font-size: 16px;
+    font-weight: 700;
+    overflow: hidden;
+}
+
+.accuracy {
+    top: 52%;
+    left: 2.5%;
+    width: 25%;
+    font-family: 'Comic Sans MS', 'Comic Sans', cursive;
+    text-transform: uppercase;
+    color: yellow;
+    font-size: 18px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-shadow: 2px 2px black;
+}
+
+.rank {
+    top: 14%;
+    left: 5%;
+    width: 17%;
+    font-family: 'Shermlock', 'Comic Sans MS', 'Comic Sans', cursive;
+    text-transform: uppercase;
+    color: yellow;
+    font-size: 22px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-shadow:
+        -1px -1px 0 black,
+         1px -1px 0 black,
+        -1px  1px 0 black,
+         1px  1px 0 black;
+}
+
+.school {
+    top: 14.5%;
+    left: 81%;
+    width: 15%;
+    height: 10%;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.type {
+    position: absolute;
+    top: 51%;
+    left: 80%;
+    width: 17%;
+    height: 11.5%;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.user-image-wrapper {
+    position: absolute;
+    top: 10%;
+    left: 1%;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;   /* the enforcement mechanism */
+    z-index: 2;
+}
+
+#user-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.card-spiral {
+    position: absolute;
+    top: -13%;
+    left: 7%;
+    height: 100%;
+    width: 90%;
+    background-image: url("OtherImages/spiralreshaped.jpg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    z-index: 1;
+}
+
+input[type="range"] {
+    width: 200%;
+    max-width: 1200px;
+    transform: translateX(-25%);
+}
+
+.rich-input {
+    border: 1px solid rgb(251, 255, 0);
+    background-color: palegoldenrod;
+    border-radius: 5%;
+    min-height: 60px;
+    width: 250px;
+    text-align: left;
+    padding: 4px;
+}
+
+.inline-icon {
+    height: 1.2em;
+    vertical-align: middle;
+    position: relative;
+    top: -2px;
+}
+
+.bank-icon {
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    transition: transform 0.1s ease;
+}
+
+.bank-icon:hover {
+    transform: scale(1.1);
+}
+
+.pip1, .pip2, .pip3 {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.pip1 {
+    top: 15%;
+    left: 45px;
+}
+
+.pip2 {
+    top: 15%;
+    left:73px;
+}
+
+.pip3 {
+    top: 15%;
+    left: 101px;
+}
+
+.color-swatches {
+    display: flex;
+    gap: 6px;
+    margin-top: 6px;
+}
+
+.swatch {
+    width: 24px;
+    height: 24px;
+    border: 2px solid gray;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.preset-image-bank {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+    max-height: 300px;
+    overflow-y: auto;
+    background-color: rgb(145, 98, 45);
+    border-radius: 8px;
+    padding: 8px;
+}
+
+.preset-thumb {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: transform 0.1s ease;
+}
+
+.preset-thumb:hover {
+    transform: scale(1.08);
+}
+
+/* .diagonal {
+    clip-path: polygon(0 0, 100% 0, 0 100%);
+} */
+
+.weaving-display {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* so it doesn't block the card's click-to-download */
+}
+
+.diagonal {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    clip-path: polygon(0 0, 90% 0, 0 110%);
+}
