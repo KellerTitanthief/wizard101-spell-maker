@@ -1,5 +1,6 @@
-let cardSchool = "Spell";
+let cardSchool = "Balance";
 let cardRank = "0";
+let cardName = "Spell";
 let pipCount = 0;
 
 const schools = [
@@ -318,6 +319,7 @@ function spiralResize() {
 
 nameInput.addEventListener("input", function() {
     nameplate.textContent = nameInput.value;
+    cardName = nameInput.value;
     fitTextToBox(nameplate, 18);
 });
 
@@ -475,7 +477,7 @@ async function downloadCard() {
 
     const link = document.createElement("a");
 
-    link.download = `${cardRank}${cardSchool}.png`;
+    link.download = `${cardRank}${cardSchool}${cardName}.png`;
     link.href = canvas.toDataURL("image/png");
 
     link.click();
