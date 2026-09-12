@@ -201,6 +201,7 @@ const presetImages = [
     { name: "troll2" },
     { name: "lostsoul" },
     { name: "stormzilla" },
+    { name: "wraith" },
 ];
 
 // For the circles and stuff
