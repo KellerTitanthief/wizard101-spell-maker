@@ -176,8 +176,8 @@ body, html {
     position: absolute;
     top: 10%;
     left: 1%;
-    width: 100%;
-    height: 100%;
+    width: 95%;
+    height: 50%;
     overflow: hidden;   /* the enforcement mechanism */
     z-index: 2;
 }
