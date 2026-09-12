@@ -440,89 +440,14 @@ async function renderDiagonal(diagonal) {
 }
 
 
-// Renders the user's uploaded artwork onto its own high-resolution canvas,
-// baking in the same position/zoom/rotate/mirror transform it has on screen.
-// We do this instead of just cranking html2canvas's overall "scale" up,
-// because the base card art (frame, spiral, icons) is already low-res --
-// blowing the whole render up would just upscale that low-quality art too.
-// This way only the user's photo (which usually has real resolution to give)
-// gets supersampled; everything else stays exactly as it already renders.
-async function renderUserImage(wrapper, userImageEl) {
-    const style = getComputedStyle(userImageEl);
-    const background = style.backgroundImage;
-
-    const match = background.match(/url\(["']?(.*?)["']?\)/);
-
-    if (!match || match[1] === "none") {
-        return null;
-    }
-
-    const image = new Image();
-    image.src = new URL(match[1], document.baseURI).href;
-
-    await new Promise((resolve, reject) => {
-        image.onload = resolve;
-        image.onerror = reject;
-    });
-
-    const width = wrapper.offsetWidth;
-    const height = wrapper.offsetHeight;
-
-    // How much extra detail to sample beyond the on-screen box. This is
-    // independent of the base card's resolution -- it only affects the
-    // flattened photo we hand back, not the rest of the card.
-    const SUPER_SAMPLE = 4;
-
-    const canvas = document.createElement("canvas");
-    canvas.width = width * SUPER_SAMPLE;
-    canvas.height = height * SUPER_SAMPLE;
-
-    const ctx = canvas.getContext("2d");
-    ctx.imageSmoothingEnabled = true;
-    ctx.imageSmoothingQuality = "high";
-    ctx.scale(SUPER_SAMPLE, SUPER_SAMPLE);
-
-    // Re-apply the live translate/scale/rotate/mirror transform. The browser
-    // resolves the %-based translate() into a plain matrix() for us here, so
-    // we don't need to redo that math ourselves.
-    const transform = style.transform;
-    if (transform && transform !== "none") {
-        const values = transform.match(/matrix\(([^)]+)\)/);
-        if (values) {
-            const parts = values[1].split(",").map(Number);
-            ctx.transform(...parts);
-        }
-    }
-
-    // Recreate background-size: contain within #user-image's own box
-    // (which is 100% x 100% of the wrapper).
-    const containScale = Math.min(width / image.naturalWidth, height / image.naturalHeight);
-    const imageWidth = image.naturalWidth * containScale;
-    const imageHeight = image.naturalHeight * containScale;
-    const x = (width - imageWidth) / 2;
-    const y = (height - imageHeight) / 2;
-
-    ctx.drawImage(image, x, y, imageWidth, imageHeight);
-
-    return canvas.toDataURL("image/png");
-}
-
 async function downloadCard() {
     const card = document.getElementById("card-frame");
     const diagonal = document.getElementById("diagonal");
-    const userImageWrapper = document.getElementById("user-image-wrapper");
-    const userImageEl = document.getElementById("user-image");
 
     let diagonalImage = null;
 
     if (diagonal) {
         diagonalImage = await renderDiagonal(diagonal);
-    }
-
-    let userImageHighRes = null;
-
-    if (userImageWrapper && userImageEl) {
-        userImageHighRes = await renderUserImage(userImageWrapper, userImageEl);
     }
 
     const canvas = await html2canvas(card, {
@@ -546,19 +471,6 @@ async function downloadCard() {
 
                 clonedDiagonal.style.backgroundSize = "100% 100%";
                 clonedDiagonal.style.backgroundPosition = "0 0";
-            }
-
-            if (userImageHighRes) {
-                const clonedUserImage =
-                    clonedDoc.getElementById("user-image");
-
-                // The transform is already baked into the flattened image,
-                // so drop it here and just stretch the render to fill the box.
-                clonedUserImage.style.transform = "none";
-                clonedUserImage.style.backgroundImage =
-                    `url("${userImageHighRes}")`;
-                clonedUserImage.style.backgroundSize = "100% 100%";
-                clonedUserImage.style.backgroundPosition = "center";
             }
         }
     });
