@@ -7,8 +7,8 @@
         {
             "type": "chrome",
             "request": "launch",
-            "name": "Open content.html",
-            "file": "c:\\Users\\Ajwad\\Downloads\\Wizard101SpellMaker\\content.html"
+            "name": "Open index.html",
+            "file": "c:\\Users\\Ajwad\\Downloads\\Wizard101SpellMaker\\index.html"
         }
     ]
 }
