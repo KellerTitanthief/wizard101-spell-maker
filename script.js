@@ -212,6 +212,7 @@ const presetImages = [
     { name: "lydia1" },
     { name: "lydia2" },
     { name: "grandmotherraven" },
+    { name: "draconian" },
 ];
 
 // For the circles and stuff
