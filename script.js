@@ -204,7 +204,7 @@ const presetImages = [
     { name: "wraith" },
     { name: "goatmonk" },
     { name: "malistaire" },
-    { name: "cyrus" },
+    { name: "sliver" },
     { name: "halston" },
     { name: "iceambrose" },
     { name: "alhazred" },
