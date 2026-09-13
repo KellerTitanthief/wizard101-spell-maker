@@ -203,6 +203,15 @@ const presetImages = [
     { name: "stormzilla" },
     { name: "wraith" },
     { name: "goatmonk" },
+    { name: "malistaire" },
+    { name: "cyrus" },
+    { name: "halston" },
+    { name: "iceambrose" },
+    { name: "alhazred" },
+    { name: "dalia" },
+    { name: "lydia1" },
+    { name: "lydia2" },
+    { name: "grandmotherraven" },
 ];
 
 // For the circles and stuff
