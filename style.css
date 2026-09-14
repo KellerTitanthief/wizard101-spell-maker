@@ -3,6 +3,12 @@
     src: url("shermlock/Shermlock.woff2") format("woff2");
 }
 
+@font-face {
+  font-family: "Comic Sans MS";
+  src: url("comicsans/ComicSansMS3.woff2") format("woff2");
+}
+
+
 h1, p {
     color: rgb(238, 231, 130);
 }
