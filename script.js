@@ -228,22 +228,6 @@ const displayCard = document.getElementById("display-card");
 const card = document.getElementById("card-frame");
 const cardSpiral = document.getElementById("card-spiral");
 
-// Lock the card frame to a fixed size once, based on whichever card art
-// loads first, so switching schools later never resizes the frame itself
-// (which would shift percentage-positioned overlays like the spiral).
-function lockCardFrameSize() {
-    if (displayCard.naturalWidth && displayCard.naturalHeight) {
-        card.style.width = `${displayCard.naturalWidth}px`;
-        card.style.height = `${displayCard.naturalHeight}px`;
-    }
-}
-
-if (displayCard.complete) {
-    lockCardFrameSize();
-} else {
-    displayCard.addEventListener("load", lockCardFrameSize, { once: true });
-}
-
 // I don't remember
 const nameInput = document.getElementById("name-input");
 const nameplate = document.getElementById("nameplate");

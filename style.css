@@ -122,7 +122,7 @@ body, html {
     height: 30%;
     font-family: 'Comic Sans MS', 'Comic Sans', 'Comic Neue' cursive;
     color: black;
-    font-size: 16px;
+    font-size: 18px;
     font-weight: 700;
     overflow: hidden;
 }
@@ -137,7 +137,7 @@ body, html {
     font-size: 18px;
     white-space: nowrap;
     overflow: hidden;
-    text-shadow: 2px 2px black;
+    text-shadow: 1px 1px black;
 }
 
 .rank {
