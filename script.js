@@ -141,7 +141,17 @@ const bankIcons = [
     { name: "polymorph", },
     { name: "enchant", },
     { name: "mutation", },
+    { name: "pvponly" },
+    { name: "nopvp" },
 ];
+
+const restrictIcons = [
+    { name: "universal" },
+    { name: "disabled" },
+    { name: "pvponly" },
+    { name: "nopvp" },
+    { name: "onecopy" },
+]
 
 const presetImages = [
     { name: "deathblade", },
@@ -247,6 +257,9 @@ const iconBank = document.getElementById("icon-bank");
 const targetSelect = document.getElementById("target-select");
 const iconSchool = document.getElementById("school");
 const iconType = document.getElementById("type");
+const restrictionBank = document.getElementById("restriction-bank");
+const centralRestrict = document.getElementById("central-restrict");
+const rightRestrict = document.getElementById("right-restrict");
 
 // Description colour
 const swatchBlack = document.getElementById("swatch-black");
@@ -262,7 +275,7 @@ const weavingSelect = document.getElementById("weaving-select");
 const weavingDisplay = document.getElementById("weaving-display");
 
 // Helper functions
-function fitTextToBox(element, maxSize, minSize = 6) {
+function fitTextToBox(element, maxSize, minSize = 40) {
     let low = minSize;
     let high = maxSize;
     let best = minSize;
@@ -270,7 +283,7 @@ function fitTextToBox(element, maxSize, minSize = 6) {
     // Binary search
     while (low <= high) {
         const mid = Math.floor((low + high) / 2);
-        element.style.fontSize = mid + "px";
+        element.style.fontSize = mid + "%";
 
         const fits = element.scrollWidth <= element.clientWidth &&
                      element.scrollHeight <= element.clientHeight;
@@ -283,7 +296,7 @@ function fitTextToBox(element, maxSize, minSize = 6) {
         }
     }
 
-    element.style.fontSize = best + "px";
+    element.style.fontSize = best + "%";
 }
 
 function updateImageTransform() {
@@ -321,7 +334,7 @@ function spiralResize() {
 nameInput.addEventListener("input", function() {
     nameplate.textContent = nameInput.value;
     cardName = nameInput.value;
-    fitTextToBox(nameplate, 18);
+    fitTextToBox(nameplate, 113);
 });
 
 // Text related functions
@@ -346,7 +359,7 @@ const description = document.getElementById("description");
 
 descInput.addEventListener("input", function() {
     description.innerHTML = descInput.innerHTML;
-    fitTextToBox(description, 18);
+    fitTextToBox(description, 113);
 });
 
 function circleMaker(school, place) {
@@ -642,3 +655,37 @@ function handleWeaving() {
 };
 
 weavingSelect.addEventListener("change", handleWeaving)
+
+// Restriction bank icons
+function handleRestrictionIconClick(icon) {
+    if (icon.name === "universal") {
+        centralRestrict.style.backgroundImage = "none";
+        rightRestrict.style.backgroundImage = "none";
+    } else if (icon.name === "disabled" || icon.name === "pvponly" || icon.name === "nopvp") {
+        centralRestrict.style.backgroundImage = `url("icons/${icon.name}.png")`;
+    } else if (icon.name === "onecopy") {
+        rightRestrict.style.backgroundImage = `url("icons/${icon.name}.png")`;
+    }
+    // centralRestrict.style.backgroundImage = icon.name === "universal" ? "none" : `url("icons/${icon.name}.png")`;
+};
+
+function restrictedIconMaker(icon, place) {
+    const iconEl = document.createElement("img");
+    iconEl.src = `icons/${icon.name}.png`;
+    iconEl.className = "restricted-icon";
+    iconEl.title = icon.name;
+
+    iconEl.addEventListener("mousedown", function(e) {
+        e.preventDefault();
+    });
+
+    iconEl.addEventListener("click", function() {
+        handleRestrictionIconClick(icon);
+    });
+
+    place.appendChild(iconEl);
+};
+
+restrictIcons.forEach(function(icon) {
+    restrictedIconMaker(icon, restrictionBank);
+});

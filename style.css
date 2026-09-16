@@ -59,15 +59,15 @@ body, html {
     width: 700px;
 }
 
-/* .restriction-bank {
+.restriction-bank {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     background-color: rgb(145, 98, 45);
     border-radius: 5%;
     gap: 8px;
-    width: 700px;
-} */
+    width: 200px;
+}
 
 .card {
     position: relative;
@@ -105,11 +105,11 @@ body, html {
     cursor: pointer;
 }
 
-.nameplate, .description, .accuracy, .rank, .type, .school, .pip1, .pip2, .pip3, .diagonal {
+.nameplate, .description, .accuracy, .rank, .type, .school, .pip1, .pip2, .pip3, .diagonal, .central-restrict, .right-restrict {
     position: absolute;
     text-align: center;
     z-index: 4;
-    outline: 1px solid rgb(255, 0, 0, 0.3);
+    /* outline: 1px solid rgb(255, 0, 0, 0.3); */
 }
 
 .nameplate {
@@ -119,7 +119,7 @@ body, html {
     font-family: 'Shermlock', 'Comic Sans MS', 'Comic Sans', cursive;
     text-transform: uppercase;
     color: white;
-    font-size: 16px;
+    font-size: 113%;
     white-space: nowrap;
     overflow: hidden;
     text-shadow: 2px 2px black;
@@ -132,7 +132,7 @@ body, html {
     height: 30%;
     font-family: 'Comic Sans MS', 'Comic Sans', 'Comic Neue' cursive;
     color: black;
-    font-size: 18px;
+    font-size: 113%;
     font-weight: 700;
     overflow: hidden;
 }
@@ -144,7 +144,7 @@ body, html {
     font-family: 'Comic Sans MS', 'Comic Sans', 'Comic Neue', cursive;
     text-transform: uppercase;
     color: yellow;
-    font-size: 18px;
+    font-size: 113%;
     white-space: nowrap;
     overflow: hidden;
     text-shadow: 1px 1px black;
@@ -157,7 +157,7 @@ body, html {
     font-family: 'Shermlock', 'Comic Sans MS', 'Comic Sans', cursive;
     text-transform: uppercase;
     color: yellow;
-    font-size: 22px;
+    font-size: 137.5%;
     white-space: nowrap;
     overflow: hidden;
     text-shadow:
@@ -183,6 +183,28 @@ body, html {
     left: 80%;
     width: 17%;
     height: 11.5%;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.central-restrict {
+    position: absolute;
+    top: 49%;
+    left: 37%;
+    width: 26%;
+    height: 16%;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.right-restrict {
+    position: absolute;
+    top: 30%;
+    left: 75%;
+    width: 26%;
+    height: 16%;
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
@@ -246,8 +268,8 @@ input[type="range"] {
 }
 
 .bank-icon {
-    width: 40px;
-    height: 40px;
+    width: 32px;
+    height: 32px;
     cursor: pointer;
     transition: transform 0.1s ease;
 }
@@ -256,9 +278,20 @@ input[type="range"] {
     transform: scale(1.1);
 }
 
+.restricted-icon {
+    width: 48px;
+    height: 48px;
+    cursor: pointer;
+    transition: transform 0.1s ease;
+}
+
+.restricted-icon:hover {
+    transform: scale(1.1);
+}
+
 .pip1, .pip2, .pip3 {
-    width: 28px;
-    height: 28px;
+    width: 14%;
+    height: 9%;
     object-fit: contain;
     background-size: contain;
     background-repeat: no-repeat;
@@ -267,17 +300,17 @@ input[type="range"] {
 
 .pip1 {
     top: 15%;
-    left: 45px;
+    left: 24%;
 }
 
 .pip2 {
     top: 15%;
-    left:73px;
+    left: 38%;
 }
 
 .pip3 {
     top: 15%;
-    left: 101px;
+    left: 52%;
 }
 
 .color-swatches {
@@ -318,10 +351,6 @@ input[type="range"] {
 .preset-thumb:hover {
     transform: scale(1.08);
 }
-
-/* .diagonal {
-    clip-path: polygon(0 0, 100% 0, 0 100%);
-} */
 
 .weaving-display {
     position: absolute;
