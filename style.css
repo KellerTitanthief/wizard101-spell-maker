@@ -59,6 +59,16 @@ body, html {
     width: 700px;
 }
 
+/* .restriction-bank {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    background-color: rgb(145, 98, 45);
+    border-radius: 5%;
+    gap: 8px;
+    width: 700px;
+} */
+
 .card {
     position: relative;
     z-index: 3;
@@ -99,7 +109,7 @@ body, html {
     position: absolute;
     text-align: center;
     z-index: 4;
-    /* outline: 1px solid rgb(255, 0, 0, 0.3); */
+    outline: 1px solid rgb(255, 0, 0, 0.3);
 }
 
 .nameplate {
