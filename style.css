@@ -139,8 +139,8 @@ body, html {
 
 .accuracy {
     top: 52%;
-    left: 2.5%;
-    width: 25%;
+    left: 0%;
+    width: 30%;
     font-family: 'Comic Sans MS', 'Comic Sans', 'Comic Neue', cursive;
     text-transform: uppercase;
     color: yellow;
