@@ -344,6 +344,7 @@ const accuracyplate = document.getElementById("accuracy");
 accuracyInput.addEventListener("input", function() {
     accuracyplate.textContent = accuracyInput.value;
     accuracyRecolour();
+    fitTextToBox(accuracyplate, 113);
 });
 
 const rankInput = document.getElementById("rank-input");
