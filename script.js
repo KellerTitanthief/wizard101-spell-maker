@@ -143,6 +143,7 @@ const bankIcons = [
     { name: "mutation", },
     { name: "pvponly" },
     { name: "nopvp" },
+    { name: "pvplevel" },
 ];
 
 const restrictIcons = [
@@ -151,6 +152,7 @@ const restrictIcons = [
     { name: "pvponly" },
     { name: "nopvp" },
     { name: "onecopy" },
+    { name: "pvplevel" },
 ]
 
 const presetImages = [
@@ -664,7 +666,7 @@ function handleRestrictionIconClick(icon) {
         rightRestrict.style.backgroundImage = "none";
     } else if (icon.name === "disabled" || icon.name === "pvponly" || icon.name === "nopvp") {
         centralRestrict.style.backgroundImage = `url("icons/${icon.name}.png")`;
-    } else if (icon.name === "onecopy") {
+    } else if (icon.name === "onecopy" || icon.name === "pvplevel") {
         rightRestrict.style.backgroundImage = `url("icons/${icon.name}.png")`;
     }
     // centralRestrict.style.backgroundImage = icon.name === "universal" ? "none" : `url("icons/${icon.name}.png")`;
