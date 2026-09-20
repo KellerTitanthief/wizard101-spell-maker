@@ -151,13 +151,13 @@ body, html {
 }
 
 .rank {
-    top: 14%;
+    top: 13%;
     left: 5%;
     width: 17%;
     font-family: 'Shermlock', 'Comic Sans MS', 'Comic Sans', cursive;
     text-transform: uppercase;
     color: yellow;
-    font-size: 137.5%;
+    font-size: 140%;
     white-space: nowrap;
     overflow: hidden;
     text-shadow:
