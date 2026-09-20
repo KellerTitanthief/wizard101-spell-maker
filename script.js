@@ -234,6 +234,7 @@ const presetImages = [
     { name: "blackhope2" },
     { name: "blackhope3" },
     { name: "blackhope4" },
+    { name: "guard" },
 ];
 
 // For the circles and stuff
