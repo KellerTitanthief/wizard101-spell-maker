@@ -230,6 +230,10 @@ const presetImages = [
     { name: "diego" },
     { name: "harold" },
     { name: "boy" },
+    { name: "blackhope1" },
+    { name: "blackhope2" },
+    { name: "blackhope3" },
+    { name: "blackhope4" },
 ];
 
 // For the circles and stuff
