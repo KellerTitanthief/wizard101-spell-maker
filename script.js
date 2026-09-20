@@ -187,6 +187,7 @@ const presetImages = [
     { name: "ghoul", },
     { name: "vampire", },
     { name: "banshee", },
+    { name: "banshee2" },
     { name: "dryad", },
     { name: "sprite", },
     { name: "pixie", },
@@ -236,6 +237,10 @@ const presetImages = [
     { name: "blackhope4" },
     { name: "guard" },
     { name: "zeke" },
+    { name: "registrar" },
+    { name: "baxby" },
+    { name: "potbelly" },
+    { name: "morganthe" },
 ];
 
 // For the circles and stuff
