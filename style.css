@@ -42,6 +42,22 @@ body, html {
     align-items: flex-start;
 }
 
+.workspace2 {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    align-items: flex-start;
+}
+
+.fusion-block {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    align-items: flex-start;
+    margin-right: 370px;
+    margin-top: 10px;
+}
+
 .description-workspace {
     display: flex;
     flex-direction: row;
@@ -103,6 +119,12 @@ body, html {
     display: inline-block;
     overflow: hidden;
     cursor: pointer;
+}
+
+#card-frame-fusion, #card-frame-fusion2 {
+    border: 2px solid black;
+    width: 50px;
+    height: 50px;
 }
 
 .nameplate, .description, .accuracy, .rank, .type, .school, .pip1, .pip2, .pip3, .diagonal, .central-restrict, .right-restrict {
@@ -220,7 +242,17 @@ body, html {
     z-index: 2;
 }
 
-#user-image {
+#user-image-wrapper2, #user-image-wrapper3 {
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;   /* the enforcement mechanism */
+    z-index: 2;
+}
+
+#user-image, #user-image2, #user-image3 {
     position: absolute;
     top: 0;
     left: 0;
@@ -242,6 +274,14 @@ body, html {
     background-repeat: no-repeat;
     background-position: center;
     z-index: 1;
+}
+
+#card-spiral-fusion, #card-spiral-fusion {
+    top: 0%;
+    left: 0%;
+    height: 100%;
+    width: 100%;
+    background-size: 100% 100%;
 }
 
 input[type="range"] {

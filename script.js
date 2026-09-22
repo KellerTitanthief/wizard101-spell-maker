@@ -258,6 +258,8 @@ const nameplate = document.getElementById("nameplate");
 // Slider variables
 const artInput = document.getElementById("art-input");
 const userImage = document.getElementById("user-image");
+const userImage2 = document.getElementById("user-image2");
+const userImage3 = document.getElementById("user-image3");
 const xSlider = document.getElementById("art-x");
 const ySlider = document.getElementById("art-y");
 const scaleSlider = document.getElementById("art-scale");
@@ -273,6 +275,7 @@ const iconType = document.getElementById("type");
 const restrictionBank = document.getElementById("restriction-bank");
 const centralRestrict = document.getElementById("central-restrict");
 const rightRestrict = document.getElementById("right-restrict");
+const imageLocation = document.getElementById("image-location");
 
 // Description colour
 const swatchBlack = document.getElementById("swatch-black");
@@ -313,13 +316,22 @@ function fitTextToBox(element, maxSize, minSize = 40) {
 }
 
 function updateImageTransform() {
+    let imageContainer = userImage;
+    const target = imageLocation.value;
+    if (target === "main-location") {
+        imageContainer = userImage;
+    } else if (target === "fusion-one") {
+        imageContainer = userImage2;
+    } else if (target === "fusion-two") {
+        imageContainer = userImage3;
+    }
     const xOffset = xSlider.value - 50;
     const yOffset = (ySlider.value - 50) * -1;
     const scale = scaleSlider.value / 100;
     const rotate = rotateSlider.value
 
     const mirrorScale = mirrored ? -1 : 1;
-    userImage.style.transform = `translate(${xOffset}%, ${yOffset}%) scaleX(${mirrorScale}) scale(${scale}) rotate(${rotate}deg)`;
+    imageContainer.style.transform = `translate(${xOffset}%, ${yOffset}%) scaleX(${mirrorScale}) scale(${scale}) rotate(${rotate}deg)`;
 }
 
 function accuracyRecolour() {
@@ -515,36 +527,61 @@ card.addEventListener("click", downloadCard);
 
 // Slider function
 function artReset() {
+    let imageContainer = userImage;
+    const target = imageLocation.value;
+    if (target === "main-location") {
+        imageContainer = userImage;
+    } else if (target === "fusion-one") {
+        imageContainer = userImage2;
+    } else if (target === "fusion-two") {
+        imageContainer = userImage3;
+    }
     xSlider.value = 50;
     ySlider.value = 50;
     scaleSlider.value = 100;
     rotateSlider.value = 0;
     mirrored = false;
-    userImage.style.transform = `scaleX(1)`;
+    imageContainer.style.transform = `scaleX(1)`;
 };
 
 artInput.addEventListener("change", function() {
     const file = artInput.files[0];
+    const target = imageLocation.value;
     if (file) {
-        userImage.style.backgroundImage = `url("${URL.createObjectURL(file)}")`;
+        if (target === "main-location") {
+            userImage.style.backgroundImage = `url("${URL.createObjectURL(file)}")`;
+        } else if (target === "fusion-one") {
+            userImage2.style.backgroundImage = `url("${URL.createObjectURL(file)}")`;
+        } else if (target === "fusion-two") {
+            userImage3.style.backgroundImage = `url("${URL.createObjectURL(file)}")`;
+        }
         artReset();
         updateImageTransform();
     }
 });
 
 function mirrorImage() {
+    let imageContainer = userImage;
+    const target = imageLocation.value;
+    if (target === "main-location") {
+        imageContainer = userImage;
+    } else if (target === "fusion-one") {
+        imageContainer = userImage2;
+    } else if (target === "fusion-two") {
+        imageContainer = userImage3;
+    }
     if (mirrored == false)
     {
-        userImage.style.transform += `scaleX(-1)`;
+        imageContainer.style.transform += `scaleX(-1)`;
         mirrored = true;
     } else {
-        userImage.style.transform += `scaleX(1)`;
+        imageContainer.style.transform += `scaleX(1)`;
         mirrored = false;
     }
 }
 
 mirror.addEventListener("click", mirrorImage);
-xSlider.addEventListener("input", updateImageTransform);
+xSlider.addEventListener("input", updateImageTransform);;
 ySlider.addEventListener("input", updateImageTransform);
 scaleSlider.addEventListener("input", updateImageTransform);
 rotateSlider.addEventListener("input", updateImageTransform);
@@ -572,7 +609,14 @@ function handleBankIconClick(icon) {
             pip.style.backgroundImage = `url("icons/${icon.name}.png")`;
         }
     } else if (target === "image") {
-        userImage.style.backgroundImage = `url("icons/${icon.name}.png")`;
+        const target2 = imageLocation.value;
+        if (target2 === "main-location") {
+            userImage.style.backgroundImage = `url("icons/${icon.name}.png")`;
+        } else if (target2 === "fusion-one") {
+            userImage2.style.backgroundImage = `url("icons/${icon.name}.png")`;
+        } else if (target2 === "fusion-two") {
+            userImage3.style.backgroundImage = `url("icons/${icon.name}.png")`;
+        }
         artReset();
         updateImageTransform();
     } 
@@ -640,7 +684,14 @@ function presetImageMaker(preset, place) {
     thumb.title = preset.name;
 
     thumb.addEventListener("click", function() {
-        userImage.style.backgroundImage = `url("SpellImages/${preset.name}.png")`;
+        const target = imageLocation.value;
+        if (target === "main-location") {
+            userImage.style.backgroundImage = `url("SpellImages/${preset.name}.png")`;
+        } else if (target === "fusion-one") {
+            userImage2.style.backgroundImage = `url("SpellImages/${preset.name}.png")`;
+        } else if (target === "fusion-two") {
+            userImage3.style.backgroundImage = `url("SpellImages/${preset.name}.png")`;
+        }
         artReset();
         updateImageTransform();
     });

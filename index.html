@@ -11,26 +11,11 @@
     <div class="introduction">
         <h1>Wizard101 Spell Maker</h1>
         <p>Wizard101 spell maker using raw art instead of images of other cards</p>
-        <p>Spellement paths are not yet included (Last Updated 20-09-2026)</p>
+        <p>Spellement paths are not yet included (Last Updated 21-09-2026)</p>
         <p>Contact: kellertitanthief@gmail.com</p>
     </div>
     <p></p>
     <div class="workspace">
-        <input type="file" accept="image/*" id="art-input">
-        <select id="weaving-select">
-            <option value="no-weaving">Weaving</option>
-            <option value="fire-weaving">Fire</option>
-            <option value="storm-weaving">Storm</option>
-            <option value="ice-weaving">Ice</option>
-            <option value="balance-weaving">Balance</option>
-            <option value="death-weaving">Death</option>
-            <option value="myth-weaving">Myth</option>
-            <option value="life-weaving">Life</option>
-            <option value="star-weaving">Star</option>
-            <option value="sun-weaving">Sun</option>
-            <option value="moon-weaving">Moon</option>
-            <option value="shadow-weaving">Shadow</option>
-        </select>
         <div class="card-frame" id="card-frame">
             <div id="card-spiral" class="card-spiral"></div>
             <div class="user-image-wrapper" id="user-image-wrapper">
@@ -53,7 +38,47 @@
         </div>
 
         <div class="icon-bank" id="icon-bank"></div>
-        
+
+        <div class="restriction-bank" id="restriction-bank"></div>
+    </div>
+
+    <div class="workspace2">
+        <div class="fusion-block" id="fusion-block">
+            <div class="card-frame" id="card-frame-fusion">
+                <div id="card-spiral-fusion" class="card-spiral"></div>
+                <div class="user-image-wrapper" id="user-image-wrapper2">
+                    <div id="user-image2"></div>
+                </div>
+
+                <div class="central-restrict" id="central-restrict"></div>
+                <div class="right-restrict" id="right-restrict"></div>
+            </div>
+
+            <div class="card-frame" id="card-frame-fusion2">
+                <div id="card-spiral-fusion" class="card-spiral"></div>
+                <div class="user-image-wrapper" id="user-image-wrapper3">
+                    <div id="user-image3"></div>
+                </div>
+
+                <div class="central-restrict" id="central-restrict"></div>
+                <div class="right-restrict" id="right-restrict"></div>
+            </div>
+        </div>
+        <input type="file" accept="image/*" id="art-input">
+        <select id="weaving-select">
+            <option value="no-weaving">Weaving</option>
+            <option value="fire-weaving">Fire</option>
+            <option value="storm-weaving">Storm</option>
+            <option value="ice-weaving">Ice</option>
+            <option value="balance-weaving">Balance</option>
+            <option value="death-weaving">Death</option>
+            <option value="myth-weaving">Myth</option>
+            <option value="life-weaving">Life</option>
+            <option value="star-weaving">Star</option>
+            <option value="sun-weaving">Sun</option>
+            <option value="moon-weaving">Moon</option>
+            <option value="shadow-weaving">Shadow</option>
+        </select>
         <select id="target-select">
             <option value="school">School</option>
             <option value="type">Type</option>
@@ -61,8 +86,11 @@
             <option value="image">Image</option>
             <option value="description">Description</option>
         </select>
-
-        <div class="restriction-bank" id="restriction-bank"></div>
+        <select id="image-location">
+            <option value="main-location">Main</option>
+            <option value="fusion-one">Fusion A</option>
+            <option value="fusion-two">Fusion B</option>
+        </select>
     </div>
     
     <p></p>
