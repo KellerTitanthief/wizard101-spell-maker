@@ -22,7 +22,7 @@ body, html {
     width: 100%;
     min-height: 100vh;
     background-attachment: fixed;
-    margin: 0;
+    margin: 0 auto;
     background-color: rgb(0, 27, 117);
     background-image: url("OtherImages/Backdrop.jpg");
     background-size: 100% 100%;
@@ -33,6 +33,7 @@ body, html {
     flex-direction: column;
     align-items: center;
     text-align: center;
+    justify-content: center;
 }
 
 .workspace {
