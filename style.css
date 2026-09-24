@@ -134,6 +134,11 @@ body, html {
     height: 50px;
 }
 
+.blank-space {
+    width: 500px;
+    height: 10px;
+}
+
 .nameplate, .description, .accuracy, .rank, .type, .school, .pip1, .pip2, .pip3, .diagonal, .central-restrict, .right-restrict {
     position: absolute;
     text-align: center;
