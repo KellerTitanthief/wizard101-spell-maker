@@ -324,7 +324,9 @@ function updateImageTransform() {
         imageContainer = userImage2;
     } else if (target === "fusion-two") {
         imageContainer = userImage3;
-    }
+    } else {
+        imageContainer = userImage;
+    } 
     const xOffset = xSlider.value - 50;
     const yOffset = (ySlider.value - 50) * -1;
     const scale = scaleSlider.value / 100;
@@ -535,6 +537,8 @@ function artReset() {
         imageContainer = userImage2;
     } else if (target === "fusion-two") {
         imageContainer = userImage3;
+    } else {
+        return;
     }
     xSlider.value = 50;
     ySlider.value = 50;
@@ -554,6 +558,10 @@ artInput.addEventListener("change", function() {
             userImage2.style.backgroundImage = `url("${URL.createObjectURL(file)}")`;
         } else if (target === "fusion-two") {
             userImage3.style.backgroundImage = `url("${URL.createObjectURL(file)}")`;
+        } else {
+            descInput.focus();
+            document.execCommand("insertHTML", false, `<img src="${URL.createObjectURL(file)}" class="inline-icon">`);
+            description.innerHTML = descInput.innerHTML;
         }
         artReset();
         updateImageTransform();
@@ -569,6 +577,8 @@ function mirrorImage() {
         imageContainer = userImage2;
     } else if (target === "fusion-two") {
         imageContainer = userImage3;
+    } else {
+        imageContainer = userImage;
     }
     if (mirrored == false)
     {
@@ -616,6 +626,8 @@ function handleBankIconClick(icon) {
             userImage2.style.backgroundImage = `url("icons/${icon.name}.png")`;
         } else if (target2 === "fusion-two") {
             userImage3.style.backgroundImage = `url("icons/${icon.name}.png")`;
+        } else {
+            userImage.style.backgroundImage = `url("icons/${icon.name}.png)`;
         }
         artReset();
         updateImageTransform();
@@ -691,6 +703,10 @@ function presetImageMaker(preset, place) {
             userImage2.style.backgroundImage = `url("SpellImages/${preset.name}.png")`;
         } else if (target === "fusion-two") {
             userImage3.style.backgroundImage = `url("SpellImages/${preset.name}.png")`;
+        } else if (target === "description") {
+            descInput.focus();
+            document.execCommand("insertHTML", false, `<img src="SpellImages/${preset.name}.png" class="inline-icon">`);
+            description.innerHTML = descInput.innerHTML;
         }
         artReset();
         updateImageTransform();
