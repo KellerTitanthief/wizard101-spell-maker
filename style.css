@@ -422,3 +422,151 @@ input[type="range"] {
     background-position: center;
     clip-path: polygon(0 0, 90% 0, 0 110%);
 }
+
+nav {
+  background: rgb(145, 98, 45);
+  padding: 15px 25px;
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+}
+
+nav a {
+  color: rgb(238, 231, 130);
+  text-decoration: none;
+  font-size: 18px;
+  font-family: Arial, sans-serif;
+  padding: 8px 12px;
+  border-radius: 6px;
+}
+
+nav a:hover {
+  background: rgb(0, 27, 117);
+}
+
+/* Tablets and below */
+@media (max-width: 900px) {
+    body, html {
+        background-attachment: scroll;  /* "fixed" is unreliable on iOS */
+        background-size: cover;
+    }
+
+    .workspace {
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+
+    .icon-bank,
+    .restriction-bank {
+        width: 95%;
+        max-width: 700px;
+        box-sizing: border-box;
+    }
+
+    input[type="range"] {
+        width: 90%;
+        max-width: 500px;
+        transform: none;
+    }
+
+    label {
+        display: block;
+        margin: 6px 0;
+    }
+}
+
+/* Phones */
+@media (max-width: 600px) {
+    .introduction {
+        margin: 0 8px;
+        padding: 4px 12px;
+    }
+
+    .introduction h1 {
+        font-size: 1.4rem;
+    }
+
+    .introduction p {
+        font-size: 0.9rem;
+    }
+
+    .workspace,
+    .workspace2,
+    .description-workspace {
+        gap: 10px;
+    }
+
+    .workspace2 {
+        flex-direction: column;
+        align-items: center;
+        width: 90%;
+    }
+
+    .workspace2 select,
+    .workspace2 input[type="file"],
+    #name-input,
+    #accuracy-input,
+    #rank-input {
+        width: 90%;
+        max-width: 320px;
+        box-sizing: border-box;
+        font-size: 16px;
+        margin: 4px 0;
+    }
+
+    .description-workspace {
+        flex-direction: column;
+        align-items: center;
+        width: 90%;
+    }
+
+    .rich-input {
+        width: 100%;
+        max-width: 320px;
+        box-sizing: border-box;
+        font-size: 16px;
+    }
+
+    .color-swatches {
+        justify-content: center;
+    }
+
+    .swatch {
+        width: 32px;
+        height: 32px; 
+    }
+
+    .card-frame2 {
+        align-items: center;
+        max-width: 100%;
+    }
+
+    #card-frame {
+        max-width: 95vw;
+    }
+
+    #display-card {
+        max-width: 100%;
+        height: auto;
+    }
+
+    .fusion-block {
+        margin-left: 0;
+        justify-content: center;
+    }
+
+    .circle {
+        width: 40px;
+        height: 40px;
+    }
+
+    .preset-image-bank {
+        max-height: 220px;
+    }
+
+    button {
+        padding: 10px 18px;
+        font-size: 16px;
+    }
+}
