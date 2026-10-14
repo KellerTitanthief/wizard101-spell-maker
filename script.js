@@ -241,6 +241,7 @@ const presetImages = [
     { name: "baxby" },
     { name: "potbelly" },
     { name: "morganthe" },
+    { name: "stormbeacon" },
 ];
 
 // For the circles and stuff
