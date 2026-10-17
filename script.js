@@ -1,7 +1,6 @@
 let cardSchool = "Balance";
 let cardRank = "0";
 let cardName = "Spell";
-let pipCount = 0;
 
 const schools = [
     { name: "fire", color: "rgb(165, 24, 24)" },
@@ -277,6 +276,10 @@ const restrictionBank = document.getElementById("restriction-bank");
 const centralRestrict = document.getElementById("central-restrict");
 const rightRestrict = document.getElementById("right-restrict");
 const imageLocation = document.getElementById("image-location");
+const pip1 = document.getElementById("pip1");
+const pip2 = document.getElementById("pip2");
+const pip3 = document.getElementById("pip3");
+const pips = [pip1, pip2, pip3];
 
 // Description colour
 const swatchBlack = document.getElementById("swatch-black");
@@ -597,6 +600,18 @@ ySlider.addEventListener("input", updateImageTransform);
 scaleSlider.addEventListener("input", updateImageTransform);
 rotateSlider.addEventListener("input", updateImageTransform);
 
+// Pip specific functions
+pips.forEach(function(pip) {
+    pip.addEventListener("click", function(e) {
+        e.stopPropagation(); 
+        pip.style.backgroundImage = "none";
+    });
+});
+
+function hasPip(pip) {
+    return pip.style.backgroundImage && pip.style.backgroundImage !== "none";
+}
+
 // Icon bank functions
 function handleBankIconClick(icon) {
     const target = targetSelect.value;
@@ -608,16 +623,20 @@ function handleBankIconClick(icon) {
     } else if (target === "school") {
         iconSchool.style.backgroundImage = icon.name === "disabled" ? "none" : `url("icons/${icon.name}.png")`;
     } else if (target === "pip") {
-        if (icon.name === "disabled" && pipCount > 0)
-        {
-            let pip = document.getElementById(`pip${pipCount}`);
-            pip.style.backgroundImage = "none";
-            pipCount -= 1;
-        } else if (pipCount < 3) {
-            pipCount += 1;
-            let pip = document.getElementById(`pip${pipCount}`);
-            console.log(pip);
-            pip.style.backgroundImage = `url("icons/${icon.name}.png")`;
+        if (icon.name === "disabled") {
+            // remove the last filled pip
+            for (let i = pips.length - 1; i >= 0; i--) {
+                if (hasPip(pips[i])) {
+                    pips[i].style.backgroundImage = "none";
+                    break;
+                }
+            }
+        } else {
+            // fill the first empty pip
+            const empty = pips.find(function(pip) { return !hasPip(pip); });
+            if (empty) {
+                empty.style.backgroundImage = `url("icons/${icon.name}.png")`;
+            }
         }
     } else if (target === "image") {
         const target2 = imageLocation.value;
@@ -657,6 +676,16 @@ function bankIconMaker(icon, place) {
 
 bankIcons.forEach(function(icon) {
     bankIconMaker(icon, iconBank);
+});
+
+iconSchool.addEventListener("click", function(e) {
+    e.stopPropagation(); 
+    iconSchool.style.backgroundImage = "none";
+});
+
+iconType.addEventListener("click", function(e) {
+    e.stopPropagation(); 
+    iconType.style.backgroundImage = "none";
 });
 
 // Description colour changer
