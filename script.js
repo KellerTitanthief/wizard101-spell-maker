@@ -248,6 +248,8 @@ const presetImages = [
     { name: "potbelly" },
     { name: "morganthe" },
     { name: "stormbeacon" },
+    { name: "pethappy" },
+    { name: "addtocounter" },
 ];
 
 // For the circles and stuff
