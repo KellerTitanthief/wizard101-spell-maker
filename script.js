@@ -250,6 +250,15 @@ const presetImages = [
     { name: "stormbeacon" },
     { name: "pethappy" },
     { name: "addtocounter" },
+    { name: "bubblefishing" },
+    { name: "healing" },
+    { name: "mana" },
+    { name: "healandmana" },
+    { name: "rolldice" },
+    { name: "rock" },
+    { name: "paper" },
+    { name: "scissors" },
+    { name: "agedichor" },
 ];
 
 // For the circles and stuff
