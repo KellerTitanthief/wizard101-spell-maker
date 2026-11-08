@@ -75,6 +75,9 @@
 
     const arrowCanvas = document.createElement("canvas");
     arrowCanvas.className = "sp-arrows";
+    // sized by CSS (never from JS) so redrawing can't feed back into layout
+    arrowCanvas.style.width = "100%";
+    arrowCanvas.style.height = "100%";
     stage.appendChild(arrowCanvas);
 
     const colEls = [];
@@ -95,7 +98,7 @@
         imgs[key] = {};
         for (const [state, suffix] of [["off", "inactive"], ["on", ""]]) {
             const im = new Image();
-            im.onload = drawArrows;
+            im.onload = scheduleDraw;
             im.src = `${IMG_DIR}${a.file}${suffix}.png`;
             imgs[key][state] = im;
         }
@@ -230,14 +233,22 @@
         }));
     }
 
+    let rafId = 0;
+    function scheduleDraw() {
+        if (rafId) return;
+        rafId = requestAnimationFrame(() => { rafId = 0; drawArrows(); });
+    }
+
     function drawArrows() {
         const W = stage.clientWidth, H = stage.clientHeight;
-        const q = Math.max(window.devicePixelRatio || 1, 2);
-        if (arrowCanvas.width !== Math.round(W * q) || arrowCanvas.height !== Math.round(H * q)) {
-            arrowCanvas.width = Math.round(W * q);
-            arrowCanvas.height = Math.round(H * q);
-            arrowCanvas.style.width = W + "px";
-            arrowCanvas.style.height = H + "px";
+        if (!W || !H) return;
+        // cap the backing store so zoomed / hi-dpi screens can't allocate huge canvases
+        let q = Math.max(window.devicePixelRatio || 1, 2);
+        q = Math.min(q, Math.sqrt(8e6 / (W * H)));
+        const cw = Math.round(W * q), ch = Math.round(H * q);
+        if (arrowCanvas.width !== cw || arrowCanvas.height !== ch) {
+            arrowCanvas.width = cw;     // attributes only - no style.width/height
+            arrowCanvas.height = ch;
         }
         const ctx = arrowCanvas.getContext("2d");
         ctx.setTransform(q, 0, 0, q, 0, 0);
@@ -299,8 +310,13 @@
         }
     }
 
-    new ResizeObserver(drawArrows).observe(stage);
-    bgImg.addEventListener("load", drawArrows);
+    // redraw only when the stage WIDTH really changes, and coalesce into one frame
+    let lastW = 0;
+    new ResizeObserver(entries => {
+        const w = Math.round(entries[0].contentRect.width);
+        if (w !== lastW) { lastW = w; scheduleDraw(); }
+    }).observe(stage);
+    bgImg.addEventListener("load", scheduleDraw);
 
     // ---------- Download ----------
     async function downloadStage() {
