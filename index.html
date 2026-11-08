@@ -12,13 +12,15 @@
         <a href="#name-input">Card</a>
         <a href="#preset-image-bank">Image Bank</a>
         <a href="#circle-container2">Card Format</a>
+        <a href="#spellement-container">Spellements</a>
     </nav>
     <p></p>
     <div class="introduction">
         <h1>Wizard101 Spell Maker</h1>
         <p>Wizard101 spell maker using raw art instead of images of other cards</p>
-        <p>Spellement paths are not yet included (Last Updated 17-10-2026)</p>
+        <p>Spellement paths are not yet included (Last Updated DD/MM/YY 07-11-2026)</p>
         <p>Contact: kellertitanthief@gmail.com</p>
+        <p>Tutorial: <a href="https://youtu.be/g6PKGp7Led8" target="_blank">https://youtu.be/g6PKGp7Led8</a></p>
     </div>
     <p></p>
     <div class="workspace">
@@ -107,6 +109,7 @@
     <input type="text" id="name-input" placeholder="Spell name">
     <input type="text" id="accuracy-input" placeholder="Spell accuracy">
     <input type="text" id="rank-input" placeholder="Spell rank">
+    <input type="text" id="level-input" placeholder="PvP level restriction" disabled>
     <div class="description-workspace" id="description-workspace">
         <div id="description-input" contenteditable="true" class="rich-input"></div>
         <div class="color-swatches">
@@ -130,7 +133,12 @@
     <div id="circle-container2"></div>
     <div id="circle-container3"></div>
 
+    <div id="spellement-container">
+        <img id="display-spellement-back" src="OtherImages/spellements.png" alt="Spellement Background" class="spellement-back">
+    </div>    
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script src="script.js"></script>
+    <script src="spellement.js"></script>
 </body>
 </html>

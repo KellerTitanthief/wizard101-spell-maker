@@ -72,6 +72,7 @@ const bankIcons = [
     { name: "jinx", },
     { name: "protectedjinx", },
     { name: "absorb", },
+    { name: "pabsorb"},
     { name: "outgoing", },
     { name: "incoming", },
     { name: "pip", },
@@ -143,6 +144,12 @@ const bankIcons = [
     { name: "pvponly" },
     { name: "nopvp" },
     { name: "pvplevel" },
+    { name: "blade" },
+    { name: "pblade" },
+    { name: "trap" },
+    { name: "ptrap" },
+    { name: "weakness" },
+    { name: "shield" },
 ];
 
 const restrictIcons = [
@@ -426,7 +433,7 @@ others.forEach(function(school) {
 });
 
 // Card download function
-async function renderDiagonal(diagonal) {
+async function renderDiagonal(diagonal, asCanvas = false) {
     const style = getComputedStyle(diagonal);
     const background = style.backgroundImage;
 
@@ -482,18 +489,19 @@ async function renderDiagonal(diagonal) {
         imageHeight
     );
 
-    return canvas.toDataURL("image/png");
+    // toDataURL throws on a tainted canvas (e.g. page opened from disk), so callers can take the canvas itself
+    return asCanvas ? canvas : canvas.toDataURL("image/png");
 }
 
 
-async function downloadCard() {
+async function captureCard() {
     const card = document.getElementById("card-frame");
     const diagonal = document.getElementById("diagonal");
 
     let diagonalImage = null;
 
     if (diagonal) {
-        diagonalImage = await renderDiagonal(diagonal);
+        diagonalImage = await renderDiagonal(diagonal, true);   // a canvas
     }
 
     const canvas = await html2canvas(card, {
@@ -511,15 +519,27 @@ async function downloadCard() {
                 const clonedDiagonal =
                     clonedDoc.getElementById("diagonal");
 
+                // html2canvas can't do clip-path, so swap in a pre-clipped canvas of the weaving
                 clonedDiagonal.style.clipPath = "none";
-                clonedDiagonal.style.backgroundImage =
-                    `url("${diagonalImage}")`;
+                clonedDiagonal.style.backgroundImage = "none";
 
-                clonedDiagonal.style.backgroundSize = "100% 100%";
-                clonedDiagonal.style.backgroundPosition = "0 0";
+                const flat = clonedDoc.createElement("canvas");
+                flat.width = diagonalImage.width;
+                flat.height = diagonalImage.height;
+                flat.getContext("2d").drawImage(diagonalImage, 0, 0);
+                flat.style.display = "block";
+                flat.style.width = "100%";
+                flat.style.height = "100%";
+                clonedDiagonal.appendChild(flat);
             }
         }
     });
+
+    return canvas;
+}
+
+async function downloadCard() {
+    const canvas = await captureCard();
 
     const link = document.createElement("a");
 
@@ -767,16 +787,32 @@ function handleWeaving() {
 
 weavingSelect.addEventListener("change", handleWeaving)
 
+// PvP level restriction text (only active while the pvplevel icon is the selected right restriction)
+const levelInput = document.getElementById("level-input");
+let rightRestrictName = null;
+
+function updateLevelRestrict() {
+    const active = rightRestrictName === "pvplevel";
+    levelInput.disabled = !active;
+    rightRestrict.textContent = active ? levelInput.value : "";
+    if (active) fitTextToBox(rightRestrict, 100);
+}
+
+levelInput.addEventListener("input", updateLevelRestrict);
+
 // Restriction bank icons
 function handleRestrictionIconClick(icon) {
     if (icon.name === "universal") {
         centralRestrict.style.backgroundImage = "none";
         rightRestrict.style.backgroundImage = "none";
+        rightRestrictName = null;
     } else if (icon.name === "disabled" || icon.name === "pvponly" || icon.name === "nopvp") {
         centralRestrict.style.backgroundImage = `url("icons/${icon.name}.png")`;
     } else if (icon.name === "onecopy" || icon.name === "pvplevel") {
         rightRestrict.style.backgroundImage = `url("icons/${icon.name}.png")`;
+        rightRestrictName = icon.name;
     }
+    updateLevelRestrict();
     // centralRestrict.style.backgroundImage = icon.name === "universal" ? "none" : `url("icons/${icon.name}.png")`;
 };
 

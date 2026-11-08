@@ -507,7 +507,8 @@ nav a:hover {
     .workspace2 input[type="file"],
     #name-input,
     #accuracy-input,
-    #rank-input {
+    #rank-input,
+    #level-input {
         width: 90%;
         max-width: 320px;
         box-sizing: border-box;
@@ -569,4 +570,155 @@ nav a:hover {
         padding: 10px 18px;
         font-size: 16px;
     }
+}
+
+/* ===== Spellement paths ===== */
+#spellement-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.sp-controls {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px 16px;
+    margin-bottom: 10px;
+    padding: 8px 14px;
+    background-color: rgb(145, 98, 45);
+    border-radius: 10px;
+    color: rgb(238, 231, 130);
+}
+
+.sp-stage {
+    --card-aspect: 0.65;
+    position: relative;
+    width: 100%;
+    max-width: 928px;
+}
+
+.sp-stage .spellement-back {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.sp-arrows {
+    position: absolute;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.sp-col {
+    position: absolute;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.sp-slot {
+    position: relative;
+    height: 31%;
+    aspect-ratio: var(--card-aspect);
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+.sp-slot canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.sp-slot.empty {
+    border: 2px dashed rgba(255, 255, 255, 0.45);
+    border-radius: 6px;
+    background: rgba(0, 0, 0, 0.12);
+    cursor: pointer;
+}
+
+.sp-slot.empty::after {
+    content: "+";
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.sp-slot.empty:hover {
+    background: rgba(255, 235, 60, 0.2);
+    border-color: rgb(255, 235, 60);
+}
+
+.sp-slot:not(.empty):hover {
+    outline: 3px solid rgb(255, 235, 60);
+}
+
+.sp-clear {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    width: 22px;
+    height: 22px;
+    padding: 0;
+    border-radius: 50%;
+    border: 1px solid black;
+    background: white;
+    line-height: 1;
+    cursor: pointer;
+    display: none;
+}
+
+.sp-slot:hover .sp-clear { display: block; }
+
+/* hide placeholders in the downloaded image */
+.sp-stage.exporting .sp-slot.empty {
+    border: none;
+    background: none;
+}
+.sp-stage.exporting .sp-slot.empty::after { display: none; }
+
+
+/* Upload / weaving / target / location bar - matches the spellement controls */
+.workspace2 {
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px 16px;
+    padding: 8px 14px;
+    background-color: rgb(145, 98, 45);
+    border-radius: 10px;
+    color: rgb(238, 231, 130);
+}
+
+
+/* PvP level number shown on the right restriction icon */
+#right-restrict {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    white-space: nowrap;
+    font-family: 'Comic Sans MS', 'Comic Sans', 'Comic Neue', cursive;
+    font-weight: 700;
+    color: yellow;
+    text-shadow:
+        -1px -1px 0 black,
+         1px -1px 0 black,
+        -1px  1px 0 black,
+         1px  1px 0 black;
+}
+
+#level-input:disabled {
+    opacity: 0.5;
 }
