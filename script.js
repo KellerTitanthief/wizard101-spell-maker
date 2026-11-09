@@ -535,27 +535,58 @@ async function captureCard() {
     const diagonal = document.getElementById("diagonal");
 
     let diagonalImage = null;
-
     if (diagonal) {
         diagonalImage = await renderDiagonal(diagonal, true);   // a canvas
     }
 
+    // Work out where each user image sits inside its box (what background-size: contain did)
+    const userLayouts = {};
+    for (const id of ["user-image", "user-image2", "user-image3"]) {
+        const el = document.getElementById(id);
+        if (!el) continue;
+        const m = el.style.backgroundImage.match(/url\(["']?(.*?)["']?\)/);
+        if (!m) continue;
+
+        const probe = new Image();
+        probe.src = m[1];
+        try { await probe.decode(); } catch (e) { continue; }
+
+        const bw = el.offsetWidth, bh = el.offsetHeight;   // layout size, ignores transforms
+        const fit = Math.min(bw / probe.naturalWidth, bh / probe.naturalHeight);
+        const w = probe.naturalWidth * fit, h = probe.naturalHeight * fit;
+        userLayouts[id] = {
+            src: m[1],
+            left: (bw - w) / 2 / bw * 100,
+            top: (bh - h) / 2 / bh * 100,
+            width: w / bw * 100,
+            height: h / bh * 100,
+        };
+    }
+
     const canvas = await html2canvas(card, {
         backgroundColor: null,
-        scale: 1,
+        scale: 3,   // or whatever you settled on
 
         onclone: function(clonedDoc) {
-            const clonedImage =
-                clonedDoc.getElementById("display-card");
-
+            const clonedImage = clonedDoc.getElementById("display-card");
             clonedImage.style.borderColor = "transparent";
             clonedImage.style.borderRadius = "0";
 
-            if (diagonalImage) {
-                const clonedDiagonal =
-                    clonedDoc.getElementById("diagonal");
+            // Real <img>s are drawn at full resolution (CSS backgrounds get shrunk first)
+            for (const [id, L] of Object.entries(userLayouts)) {
+                const el = clonedDoc.getElementById(id);
+                if (!el) continue;
+                el.style.backgroundImage = "none";
+                const im = clonedDoc.createElement("img");
+                im.src = L.src;
+                im.style.cssText =
+                    `position:absolute;display:block;` +
+                    `left:${L.left}%;top:${L.top}%;width:${L.width}%;height:${L.height}%;`;
+                el.appendChild(im);
+            }
 
-                // html2canvas can't do clip-path, so swap in a pre-clipped canvas of the weaving
+            if (diagonalImage) {
+                const clonedDiagonal = clonedDoc.getElementById("diagonal");
                 clonedDiagonal.style.clipPath = "none";
                 clonedDiagonal.style.backgroundImage = "none";
 
